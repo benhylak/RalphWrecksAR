@@ -1,0 +1,241 @@
+fileFormatVersion: 2
+guid: 3ac28f2d6f47f4840a4a6b61d0483373
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Chest
+    100002: Head
+    100004: Hips
+    100006: LeftCollar
+    100008: LeftElbow
+    100010: LeftFoot
+    100012: LeftHand
+    100014: LeftIndex_01
+    100016: LeftIndex_02
+    100018: LeftIndex_03
+    100020: LeftKnee
+    100022: LeftLittle_01
+    100024: LeftLittle_02
+    100026: LeftLittle_03
+    100028: LeftMiddle_01
+    100030: LeftMiddle_02
+    100032: LeftMiddle_03
+    100034: LeftRing_01
+    100036: LeftRing_02
+    100038: LeftRing_03
+    100040: LeftShoulder
+    100042: LeftThigh
+    100044: LeftThumb_01
+    100046: LeftThumb_02
+    100048: LeftThumb_03
+    100050: LeftToe
+    100052: Neck
+    100054: Pelvis
+    100056: Ralph
+    100058: //RootNode
+    100060: RightCollar
+    100062: RightElbow
+    100064: RightFoot
+    100066: RightHand
+    100068: RightIndex_01
+    100070: RightIndex_02
+    100072: RightIndex_03
+    100074: RightKnee
+    100076: RightLittle_01
+    100078: RightLittle_02
+    100080: RightLittle_03
+    100082: RightMiddle_01
+    100084: RightMiddle_02
+    100086: RightMiddle_03
+    100088: RightRing_01
+    100090: RightRing_02
+    100092: RightRing_03
+    100094: RightShoulder
+    100096: RightThigh
+    100098: RightThumb_01
+    100100: RightThumb_02
+    100102: RightThumb_03
+    100104: RightToe
+    100106: Root
+    100108: Waist
+    400000: Chest
+    400002: Head
+    400004: Hips
+    400006: LeftCollar
+    400008: LeftElbow
+    400010: LeftFoot
+    400012: LeftHand
+    400014: LeftIndex_01
+    400016: LeftIndex_02
+    400018: LeftIndex_03
+    400020: LeftKnee
+    400022: LeftLittle_01
+    400024: LeftLittle_02
+    400026: LeftLittle_03
+    400028: LeftMiddle_01
+    400030: LeftMiddle_02
+    400032: LeftMiddle_03
+    400034: LeftRing_01
+    400036: LeftRing_02
+    400038: LeftRing_03
+    400040: LeftShoulder
+    400042: LeftThigh
+    400044: LeftThumb_01
+    400046: LeftThumb_02
+    400048: LeftThumb_03
+    400050: LeftToe
+    400052: Neck
+    400054: Pelvis
+    400056: Ralph
+    400058: //RootNode
+    400060: RightCollar
+    400062: RightElbow
+    400064: RightFoot
+    400066: RightHand
+    400068: RightIndex_01
+    400070: RightIndex_02
+    400072: RightIndex_03
+    400074: RightKnee
+    400076: RightLittle_01
+    400078: RightLittle_02
+    400080: RightLittle_03
+    400082: RightMiddle_01
+    400084: RightMiddle_02
+    400086: RightMiddle_03
+    400088: RightRing_01
+    400090: RightRing_02
+    400092: RightRing_03
+    400094: RightShoulder
+    400096: RightThigh
+    400098: RightThumb_01
+    400100: RightThumb_02
+    400102: RightThumb_03
+    400104: RightToe
+    400106: Root
+    400108: Waist
+    2100000: 'Material #13'
+    2100002: 'Material #14'
+    4300000: Ralph
+    7400000: Mutant Breathing Idle
+    9500000: //RootNode
+    13700000: Ralph
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #13'
+    second: {fileID: 2100000, guid: 173f1971e2c664a4cbaf0f8adecd2777, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #14'
+    second: {fileID: 2100000, guid: 061ee0b91c06b4c8aa2b1523fe44a371, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Mutant Breathing Idle
+      takeName: mixamo.com
+      firstFrame: 0
+      lastFrame: 121
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.0254
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
