@@ -39,21 +39,24 @@ public class WallManager : MonoBehaviour
     void UpdateWall(ARPlaneAnchor anchor)
     {
         GameObject wall = anchorWallMap[anchor.identifier];
+
         ARPlaneAnchorGameObject arAnchorGameObj = 
             UnityARAnchorManager
                 .Instance
                 .planeAnchorMap[anchor.identifier];
 
         if (arAnchorGameObj != null) {
-        
+            
+            var mf = arAnchorGameObj.gameObject.GetComponentInChildren<MeshFilter>();
+
             wall.transform.localScale = new Vector3(
-                arAnchorGameObj.gameObject.transform.localScale.x * 10,
-                arAnchorGameObj.gameObject.transform.localScale.z * 10,
+                mf.transform.localScale.x * 10,
+                mf.transform.localScale.z * 10,
                 0.2f
             );
 
-            wall.transform.position = arAnchorGameObj.gameObject.transform.position;
-            wall.transform.forward = arAnchorGameObj.gameObject.transform.up;
+            wall.transform.position = mf.transform.position;
+            wall.transform.forward = mf.transform.up;
 
             wall.transform.position -= wall.transform.forward * wall.transform.localScale.z/2;   
         }
