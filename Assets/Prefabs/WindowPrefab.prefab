@@ -3152,7 +3152,8 @@ MonoBehaviour:
   EventDetachedMinMass: 1
   EventDetachedMinVelocity: 1
   EventDetachedMaxSounds: 5
-  EventDetachedSoundArray: []
+  EventDetachedSoundArray:
+  - {fileID: 8300000, guid: ebdc6cfd7933b44b59d3a42439236d59, type: 3}
   EventDetachedMaxPrefabs: 5
   EventDetachedPrefabsArray: []
   EventDetachedCollisionCallMethod: 
