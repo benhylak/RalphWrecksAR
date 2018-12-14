@@ -180,8 +180,8 @@ public class GameManager : MonoBehaviour
                 
                 //var rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform) * Quaternion.AngleAxis(90, Vector3.left);
                 newWindow.transform.forward = arAnchorGameObj.gameObject.transform.up;
-                newWindow.transform.parent = arAnchorGameObj.gameObject.transform;
-                
+                newWindow.transform.parent = arAnchorGameObj.gameObject.GetComponentInChildren<MeshFilter>().transform;
+               
                 return true;
             }
         }
