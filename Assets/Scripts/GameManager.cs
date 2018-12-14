@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.XR;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.UI;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +27,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject Ralph;
 
+    public Toggle setupToggle;
+
+    public GameObject windowPrefab;
+
     void Start()
     {
         ArcadeCabinet.SetActive(false);
@@ -39,20 +45,27 @@ public class GameManager : MonoBehaviour
     {
         if(m_HammerSwingingAnim == null)
         {
+            Debug.Log("GameManager: Start swingin!");
+
             m_HammerSwingingAnim = m_Hammer.transform
-                .DOLocalRotate(new Vector3(0, -30, 0), 0.35f)
-                .SetEase(Ease.InBack)
+                .DOLocalRotate(new Vector3(0, -30, 0), 0.125f)
+                .SetEase(Ease.InQuad)
                 .SetLoops(-1, LoopType.Yoyo);
 
             m_HammerSwingingAnim.Play();
         }
+        // else
+        // {
+        //     StopSwingingHammer();
+        //     Debug.Log("GameManager: Stop swingin dummy.");
+        // }
     }
 
     public void StopSwingingHammer()
     {   
         if(m_HammerSwingingAnim != null)
         {
-            m_HammerSwingingAnim.Rewind();
+            m_HammerSwingingAnim.SmoothRewind();
             m_HammerSwingingAnim = null;
         }
     }
@@ -74,15 +87,17 @@ public class GameManager : MonoBehaviour
     
     // Update is called once per frame
     void Update () {
+
+        Reticle.SetActive(setupToggle.isOn);
+
         if(Input.touchCount == 1) 
         {
             var touch = Input.GetTouch(0);
 
             if (touch.phase == TouchPhase.Ended)
             {
-                if(!placed)
+                if(setupToggle.isOn && Reticle.transform.up == Vector3.up)
                 {
-                    placed = true;
                     ArcadeCabinet.SetActive(true);
 
                     ArcadeCabinet.transform.position = Reticle.transform.position;
@@ -95,8 +110,6 @@ public class GameManager : MonoBehaviour
 
                     ArcadeCabinet.transform.forward = lookAtCameraFlattened;
                     Ralph.transform.forward = lookAtCameraFlattened;
-                
-                    Reticle.SetActive(false);
                 }
                 else
                 {
@@ -106,23 +119,128 @@ public class GameManager : MonoBehaviour
 
                     Debug.DrawRay(ray.origin, ray.direction, Color.red, 2f);
 
-                    if (Physics.Raycast(ray, out hit))
+                    if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Cabinet")
                     {
-                        if(hit.transform.tag == "Cabinet")
-                        {
-                            Ralph.GetComponent<RalphBehavior>().GrandEntrance();
-                            return;
-                        }
-                    } 
+                        Ralph.GetComponent<RalphBehavior>().GrandEntrance();
+                    }
+                    else
+                    {
+                        var viewportPosition = Camera.main.ScreenToViewportPoint(touch.position);
 
-                    placed = false;
-                    Reticle.SetActive(true);         
+                        ARPoint point = new ARPoint {
+                            x = viewportPosition.x,
+                            y = viewportPosition.y
+                        };
+
+                        WindowHitTest(point);
+                    }        
                 }
             }
         }
         
         UpdateReticle();
     }
+
+    bool WindowHitTest(ARPoint point)
+    {
+        Debug.Log("GameManager: Window hit test");
+
+        // prioritize reults types
+        ARHitTestResultType[] resultTypes = {
+            ARHitTestResultType.ARHitTestResultTypeExistingPlane,
+            ARHitTestResultType.ARHitTestResultTypeEstimatedVerticalPlane, 
+        }; 
+
+        List<ARHitTestResult> hitResults = null;
+
+        foreach(var resType in resultTypes)
+        {
+            hitResults = UnityARSessionNativeInterface
+                .GetARSessionNativeInterface ()
+                .HitTest (point, ARHitTestResultType.ARHitTestResultTypeExistingPlane);
+
+            if(hitResults.Count > 0) break;
+        }
+        
+        if (hitResults.Count > 0) {
+            var hitResult = hitResults.First();
+
+            ARPlaneAnchorGameObject arAnchorGameObj = 
+                UnityARAnchorManager
+                    .Instance
+                    .planeAnchorMap[hitResult.anchorIdentifier];
+            
+            if(arAnchorGameObj != null && arAnchorGameObj.planeAnchor.alignment == ARPlaneAnchorAlignment.ARPlaneAnchorAlignmentVertical)
+            {
+                var newWindow = Instantiate(windowPrefab);
+
+                Debug.Log("GameManager: Made window!");
+
+                newWindow.transform.position = UnityARMatrixOps.GetPosition (hitResult.worldTransform);
+                
+                //var rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform) * Quaternion.AngleAxis(90, Vector3.left);
+                newWindow.transform.forward = arAnchorGameObj.gameObject.transform.up;
+                newWindow.transform.parent = arAnchorGameObj.gameObject.transform;
+                
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+     // void Update()
+    // {
+    //     if(Input.touchCount > 0) 
+    //     {
+    //         var touch = Input.GetTouch(0);
+
+    //         if (touch.phase == TouchPhase.Ended)
+    //         {
+    //             var viewportPosition = Camera.main.ScreenToViewportPoint(touch.position);
+
+    //             ARPoint point = new ARPoint {
+    //                 x = viewportPosition.x,
+    //                 y = viewportPosition.y
+    //             };
+
+    //             // prioritize reults types
+    //             ARHitTestResultType[] resultTypes = {
+    //                 ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent,
+    //                 ARHitTestResultType.ARHitTestResultTypeEstimatedVerticalPlane, 
+    //             }; 
+                
+    //             foreach (ARHitTestResultType resultType in resultTypes)
+    //             {
+    //                 if (HitTestWithResultType (point, resultType))
+    //                 {
+    //                     return;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    // bool HitTestWithResultType (ARPoint point, ARHitTestResultType resultTypes)
+    // {
+    //     List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resultTypes);
+    //     if (hitResults.Count > 0) {
+    //         var hitResult = hitResults.First();
+    //         //foreach (var hitResult in hitResults) {
+    //             Debug.Log ("Got hit!");
+
+    //             //instantiate the brick walls
+
+                
+
+    //             // transform.position = UnityARMatrixOps.GetPosition (hitResult.worldTransform);
+    //             // transform.rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform);
+    //             //Debug.Log (string.Format ("x:{0:0.######} y:{1:0.######} z:{2:0.######}", Reticle.transform.position.x, Reticle.transform.position.y, Reticle.transform.position.z));
+    //             return true;
+    //        // }
+    //     }
+    //     return false;
+    // }
 
     public void UpdateReticle()
     {
