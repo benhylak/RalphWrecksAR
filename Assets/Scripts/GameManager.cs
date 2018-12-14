@@ -6,7 +6,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using System.Linq;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public float maxRayDistance = 30.0f;
     public LayerMask collisionLayer = 1 << 10;  //ARKitPlane layer
@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
 
     public GameObject windowPrefab;
 
+    public bool isFixing = false;
+
+    public List<GameObject> windows = new List<GameObject>();
+
+    public WallManager wallManager;
+
     void Start()
     {
         ArcadeCabinet.SetActive(false);
@@ -53,6 +59,8 @@ public class GameManager : MonoBehaviour
                 .SetLoops(-1, LoopType.Yoyo);
 
             m_HammerSwingingAnim.Play();
+
+            isFixing = true;
         }
         // else
         // {
@@ -67,6 +75,8 @@ public class GameManager : MonoBehaviour
         {
             m_HammerSwingingAnim.SmoothRewind();
             m_HammerSwingingAnim = null;
+
+            isFixing = false;
         }
     }
 
@@ -75,10 +85,9 @@ public class GameManager : MonoBehaviour
         List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resultTypes);
         if (hitResults.Count > 0) {
             foreach (var hitResult in hitResults) {
-                Debug.Log ("Got hit!");
                 Reticle.transform.position = UnityARMatrixOps.GetPosition (hitResult.worldTransform);
                 Reticle.transform.rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform);
-                Debug.Log (string.Format ("x:{0:0.######} y:{1:0.######} z:{2:0.######}", Reticle.transform.position.x, Reticle.transform.position.y, Reticle.transform.position.z));
+               // Debug.Log (string.Format ("x:{0:0.######} y:{1:0.######} z:{2:0.######}", Reticle.transform.position.x, Reticle.transform.position.y, Reticle.transform.position.z));
                 return true;
             }
         }
@@ -117,11 +126,9 @@ public class GameManager : MonoBehaviour
                     Ray ray = Camera.main.ScreenPointToRay(touch.position);
                     RaycastHit hit;
 
-                    Debug.DrawRay(ray.origin, ray.direction, Color.red, 2f);
-
-                    if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Cabinet")
+                    if (Physics.Raycast(ray, out hit) && (hit.transform.tag == "Cabinet" || hit.transform.tag == "Character"))
                     {
-                        if(Ralph.GetComponent<RalphBehavior>().hasEntered)
+                        if(!Ralph.GetComponent<RalphBehavior>().hasEntered)
                             Ralph.GetComponent<RalphBehavior>().GrandEntrance();
                         else
                             Ralph.GetComponent<RalphBehavior>().ThrowBrick();
@@ -146,6 +153,8 @@ public class GameManager : MonoBehaviour
 
     bool WindowHitTest(ARPoint point)
     {
+        wallManager.shouldUpdate = false;
+        
         Debug.Log("GameManager: Window hit test");
 
         // prioritize reults types
@@ -183,7 +192,13 @@ public class GameManager : MonoBehaviour
                 
                 //var rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform) * Quaternion.AngleAxis(90, Vector3.left);
                 newWindow.transform.forward = arAnchorGameObj.gameObject.transform.up;
-                //newWindow.transform.parent = arAnchorGameObj.gameObject.GetComponentInChildren<MeshFilter>().transform;
+
+                windows.Add(newWindow);
+                
+                newWindow.transform.parent = wallManager
+                    .anchorWallMap[arAnchorGameObj
+                    .planeAnchor.identifier]
+                    .transform;
                
                 return true;
             }
