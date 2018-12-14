@@ -7599,6 +7599,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114943371121951832, guid: a06810ba93d944a50958b437b7e9e271,
+        type: 2}
+      propertyPath: EventDetachedSoundArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ebdc6cfd7933b44b59d3a42439236d59, type: 3}
+    - target: {fileID: 1977358900261720, guid: a06810ba93d944a50958b437b7e9e271, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a06810ba93d944a50958b437b7e9e271, type: 2}
   m_IsPrefabAsset: 0
@@ -24913,7 +24922,7 @@ MonoBehaviour:
     type: 2}
   isFixing: 0
   windows: []
-  wallManager: {fileID: 0}
+  wallManager: {fileID: 1820656120}
 --- !u!4 &1657973963
 Transform:
   m_ObjectHideFlags: 0
@@ -25021,7 +25030,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dae9906c2f7a043c29e233f2b813e19c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.412
+      value: 1.98
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dae9906c2f7a043c29e233f2b813e19c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -27093,6 +27102,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   wallPrefab: {fileID: 1435251632026966, guid: d23b5ae699e6243cbbb100e37483c387, type: 2}
+  shouldUpdate: 1
 --- !u!4 &1820656121
 Transform:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ public class RalphBehavior: MonoBehaviour
         GetComponentInChildren<Collider>().isTrigger = true;
 
         transform
-            .DOScale(new Vector3(1.45f, 1.45f, 1.45f), 1.2f)
+            .DOScale(new Vector3(1.325f, 1.325f, 1.325f), 1.2f)
             .SetEase(Ease.OutElastic)
             .Play();
 
