@@ -8,11 +8,17 @@ public class RalphBehavior: MonoBehaviour
 
 	private Animator m_AnimationController;
 
+	public GameObject brickInHand;
+	public GameObject brickPrefab;
+
+	public GameManager gameManager;
 
 	public bool LookAt = false;
 	public bool outOfRange = false;
 
 	public bool hasEntered = false;
+
+	public float nextUpdateTime = 0f;
 
 	public Quaternion lastRotation = Quaternion.identity;
 
@@ -23,17 +29,31 @@ public class RalphBehavior: MonoBehaviour
 
     void Update()
     {
-
+		if(hasEntered && Time.time > nextUpdateTime)
+		{
+			ThrowBrick();
+			nextUpdateTime = Time.time + Random.Range(8, 15);
+		}
     }
 
 	public void ThrowBrick()
 	{
+		brickInHand.SetActive(true);
 		m_AnimationController.SetTrigger("Throw");
 	}
 
 	public void ReleaseBrick()
 	{
-		Debug.Log("Ralph: Brick Release!");
+		var newBrick = Instantiate(brickPrefab).GetComponent<Brick>();
+		
+		var targetWindow = gameManager.windows.PickRandom();
+
+		newBrick.SetOrigin(brickInHand.transform);
+		newBrick.SetTargetWindow(targetWindow.GetComponent<Window>());
+
+		newBrick.transform.localScale = brickInHand.transform.lossyScale;
+	
+		brickInHand.SetActive(false);
 	}
 
     public void GrandEntrance()
@@ -41,11 +61,13 @@ public class RalphBehavior: MonoBehaviour
         GetComponentInChildren<Collider>().isTrigger = true;
 
         transform
-            .DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1.2f)
+            .DOScale(new Vector3(1.45f, 1.45f, 1.45f), 1.2f)
             .SetEase(Ease.OutElastic)
             .Play();
 
 		hasEntered = true;
+
+		nextUpdateTime = Time.time + Random.Range(8, 15);
     }
 
     void LateUpdate()
@@ -72,8 +94,8 @@ public class RalphBehavior: MonoBehaviour
 		var a = Quaternion.Angle(identity, targetRot);
 
 		//deadband of 60<->90, prevents flickering
-		if(a > 90f) outOfRange = true;
-		else if(a < 60f) outOfRange = false;
+		if(a > 50f) outOfRange = true;
+		else if(a < 35f) outOfRange = false;
 		
 		outOfRange = false;
 

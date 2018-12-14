@@ -16,8 +16,10 @@ public class WallManager : MonoBehaviour
 
     float updateInterval = 0.5f;
 
+    public bool shouldUpdate = true;
 
-    private Dictionary<string, GameObject> anchorWallMap = new Dictionary<string, GameObject>();
+
+    public Dictionary<string, GameObject> anchorWallMap = new Dictionary<string, GameObject>();
 
     void Start()
     {
@@ -38,27 +40,30 @@ public class WallManager : MonoBehaviour
 
     void UpdateWall(ARPlaneAnchor anchor)
     {
-        GameObject wall = anchorWallMap[anchor.identifier];
+        if(shouldUpdate)
+        {
+            GameObject wall = anchorWallMap[anchor.identifier];
 
-        ARPlaneAnchorGameObject arAnchorGameObj = 
-            UnityARAnchorManager
-                .Instance
-                .planeAnchorMap[anchor.identifier];
+            ARPlaneAnchorGameObject arAnchorGameObj = 
+                UnityARAnchorManager
+                    .Instance
+                    .planeAnchorMap[anchor.identifier];
 
-        if (arAnchorGameObj != null) {
-            
-            var mf = arAnchorGameObj.gameObject.GetComponentInChildren<MeshFilter>();
+            if (arAnchorGameObj != null) {
+                
+                var mf = arAnchorGameObj.gameObject.GetComponentInChildren<MeshFilter>();
 
-            wall.transform.localScale = new Vector3(
-                mf.transform.localScale.x * 10,
-                mf.transform.localScale.z * 10,
-                0.2f
-            );
+                wall.transform.localScale = new Vector3(
+                    mf.transform.localScale.x * 10,
+                    mf.transform.localScale.z * 10,
+                    0.2f
+                );
 
-            wall.transform.position = mf.transform.position;
-            wall.transform.forward = mf.transform.up;
+                wall.transform.position = mf.transform.position;
+                wall.transform.forward = mf.transform.up;
 
-            wall.transform.position -= wall.transform.forward * wall.transform.localScale.z/2;   
+                wall.transform.position -= wall.transform.forward * wall.transform.localScale.z/2;   
+            }
         }
     }
 
