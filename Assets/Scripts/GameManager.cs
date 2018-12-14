@@ -121,9 +121,12 @@ public class GameManager : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Cabinet")
                     {
-                        Ralph.GetComponent<RalphBehavior>().GrandEntrance();
+                        if(Ralph.GetComponent<RalphBehavior>().hasEntered)
+                            Ralph.GetComponent<RalphBehavior>().GrandEntrance();
+                        else
+                            Ralph.GetComponent<RalphBehavior>().ThrowBrick();
                     }
-                    else
+                    else if(setupToggle.isOn)
                     {
                         var viewportPosition = Camera.main.ScreenToViewportPoint(touch.position);
 
@@ -180,7 +183,7 @@ public class GameManager : MonoBehaviour
                 
                 //var rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform) * Quaternion.AngleAxis(90, Vector3.left);
                 newWindow.transform.forward = arAnchorGameObj.gameObject.transform.up;
-                newWindow.transform.parent = arAnchorGameObj.gameObject.GetComponentInChildren<MeshFilter>().transform;
+                //newWindow.transform.parent = arAnchorGameObj.gameObject.GetComponentInChildren<MeshFilter>().transform;
                
                 return true;
             }

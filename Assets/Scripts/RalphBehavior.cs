@@ -6,21 +6,35 @@ public class RalphBehavior: MonoBehaviour
     public Transform camera;
     public GameObject head;
 
+	private Animator m_AnimationController;
+
 
 	public bool LookAt = false;
 	public bool outOfRange = false;
+
+	public bool hasEntered = false;
 
 	public Quaternion lastRotation = Quaternion.identity;
 
     void Start()
     {
-
+		m_AnimationController = GetComponent<Animator>();
     }
 
     void Update()
     {
 
     }
+
+	public void ThrowBrick()
+	{
+		m_AnimationController.SetTrigger("Throw");
+	}
+
+	public void ReleaseBrick()
+	{
+		Debug.Log("Ralph: Brick Release!");
+	}
 
     public void GrandEntrance()
     {
@@ -30,6 +44,8 @@ public class RalphBehavior: MonoBehaviour
             .DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1.2f)
             .SetEase(Ease.OutElastic)
             .Play();
+
+		hasEntered = true;
     }
 
     void LateUpdate()
