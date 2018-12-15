@@ -152,9 +152,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     bool WindowHitTest(ARPoint point)
-    {
-        wallManager.shouldUpdate = false;
-        
+    {        
         Debug.Log("GameManager: Window hit test");
 
         // prioritize reults types
@@ -194,11 +192,14 @@ public class GameManager : Singleton<GameManager>
                 newWindow.transform.forward = arAnchorGameObj.gameObject.transform.up;
 
                 windows.Add(newWindow);
+
+                wallManager.shouldUpdate = false;
                 
-                newWindow.transform.parent = wallManager
-                    .anchorWallMap[arAnchorGameObj
-                    .planeAnchor.identifier]
-                    .transform;
+                // newWindow.transform.parent = wallManager
+                //     .anchorWallMap[arAnchorGameObj
+                //     .planeAnchor.identifier]
+                //     .GetComponentInChildren<TextureTilingController>()
+                //     .transform;
                
                 return true;
             }

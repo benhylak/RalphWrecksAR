@@ -4,7 +4,7 @@ public class Brick : MonoBehaviour
 {
     private Vector3 targetPos;
 
-    float speed = 2f;
+    float speed = 3.5f;
 
     public void Start()
     {
@@ -34,7 +34,7 @@ public class Brick : MonoBehaviour
 
     public void SetTargetWindow(Window window)
     {
-        targetPos = window.transform.position - window.transform.forward * 0.25f;
+        targetPos = window.transform.position - window.transform.forward * 0.1f;
         window.bricks.Add(this);
     }
 }

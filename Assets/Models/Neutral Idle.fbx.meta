@@ -1,36 +1,36 @@
 fileFormatVersion: 2
-guid: b6df3f8d0babd4e50bb4c6c79d4f044c
+guid: 75054d7899d594d6994a94166aff0cea
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: Chest
-    100002: //RootNode
-    100004: Head
-    100006: Hips
-    100008: LeftCollar
-    100010: LeftElbow
-    100012: LeftFoot
-    100014: LeftHand
-    100016: LeftIndex_01
-    100018: LeftIndex_02
-    100020: LeftIndex_03
-    100022: LeftKnee
-    100024: LeftLittle_01
-    100026: LeftLittle_02
-    100028: LeftLittle_03
-    100030: LeftMiddle_01
-    100032: LeftMiddle_02
-    100034: LeftMiddle_03
-    100036: LeftRing_01
-    100038: LeftRing_02
-    100040: LeftRing_03
-    100042: LeftShoulder
-    100044: LeftThigh
-    100046: LeftThumb_01
-    100048: LeftThumb_02
-    100050: LeftThumb_03
-    100052: LeftToe
-    100054: Neck
+    100002: Head
+    100004: Hips
+    100006: LeftCollar
+    100008: LeftElbow
+    100010: LeftFoot
+    100012: LeftHand
+    100014: LeftIndex_01
+    100016: LeftIndex_02
+    100018: LeftIndex_03
+    100020: LeftKnee
+    100022: LeftLittle_01
+    100024: LeftLittle_02
+    100026: LeftLittle_03
+    100028: LeftMiddle_01
+    100030: LeftMiddle_02
+    100032: LeftMiddle_03
+    100034: LeftRing_01
+    100036: LeftRing_02
+    100038: LeftRing_03
+    100040: LeftShoulder
+    100042: LeftThigh
+    100044: LeftThumb_01
+    100046: LeftThumb_02
+    100048: LeftThumb_03
+    100050: LeftToe
+    100052: Neck
+    100054: //RootNode
     100056: Pelvis
     100058: Ralph
     100060: RightCollar
@@ -59,33 +59,33 @@ ModelImporter:
     100106: Root
     100108: Waist
     400000: Chest
-    400002: //RootNode
-    400004: Head
-    400006: Hips
-    400008: LeftCollar
-    400010: LeftElbow
-    400012: LeftFoot
-    400014: LeftHand
-    400016: LeftIndex_01
-    400018: LeftIndex_02
-    400020: LeftIndex_03
-    400022: LeftKnee
-    400024: LeftLittle_01
-    400026: LeftLittle_02
-    400028: LeftLittle_03
-    400030: LeftMiddle_01
-    400032: LeftMiddle_02
-    400034: LeftMiddle_03
-    400036: LeftRing_01
-    400038: LeftRing_02
-    400040: LeftRing_03
-    400042: LeftShoulder
-    400044: LeftThigh
-    400046: LeftThumb_01
-    400048: LeftThumb_02
-    400050: LeftThumb_03
-    400052: LeftToe
-    400054: Neck
+    400002: Head
+    400004: Hips
+    400006: LeftCollar
+    400008: LeftElbow
+    400010: LeftFoot
+    400012: LeftHand
+    400014: LeftIndex_01
+    400016: LeftIndex_02
+    400018: LeftIndex_03
+    400020: LeftKnee
+    400022: LeftLittle_01
+    400024: LeftLittle_02
+    400026: LeftLittle_03
+    400028: LeftMiddle_01
+    400030: LeftMiddle_02
+    400032: LeftMiddle_03
+    400034: LeftRing_01
+    400036: LeftRing_02
+    400038: LeftRing_03
+    400040: LeftShoulder
+    400042: LeftThigh
+    400044: LeftThumb_01
+    400046: LeftThumb_02
+    400048: LeftThumb_03
+    400050: LeftToe
+    400052: Neck
+    400054: //RootNode
     400056: Pelvis
     400058: Ralph
     400060: RightCollar
@@ -151,14 +151,14 @@ ModelImporter:
       name: mixamo.com
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 115
+      lastFrame: 263
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -170,28 +170,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: NewEvent
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0
-        functionName: NewEvent
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.47526887
-        functionName: ReleaseBrick
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

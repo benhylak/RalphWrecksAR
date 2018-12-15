@@ -20,6 +20,8 @@ public class RalphBehavior: MonoBehaviour
 
 	public float nextUpdateTime = 0f;
 
+	public bool doEnter = false;
+
 	public Quaternion lastRotation = Quaternion.identity;
 
     void Start()
@@ -29,6 +31,12 @@ public class RalphBehavior: MonoBehaviour
 
     void Update()
     {
+		if(doEnter)
+		{
+			GrandEntrance();
+			doEnter = false;
+		}
+
 		if(hasEntered && Time.time > nextUpdateTime)
 		{
 			ThrowBrick();
@@ -44,6 +52,8 @@ public class RalphBehavior: MonoBehaviour
 
 	public void ReleaseBrick()
 	{
+		Debug.Log("Released brick");
+		
 		var newBrick = Instantiate(brickPrefab).GetComponent<Brick>();
 		
 		var targetWindow = gameManager.windows.PickRandom();
@@ -61,13 +71,14 @@ public class RalphBehavior: MonoBehaviour
         GetComponentInChildren<Collider>().isTrigger = true;
 
         transform
-            .DOScale(new Vector3(1.325f, 1.325f, 1.325f), 1.2f)
+            .DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1.2f)
             .SetEase(Ease.OutElastic)
             .Play();
 
 		hasEntered = true;
+	//	m_AnimationController.SetTrigger("Look");
 
-		nextUpdateTime = Time.time + Random.Range(8, 15);
+		nextUpdateTime = Time.time + 6.5f;
     }
 
     void LateUpdate()
@@ -93,12 +104,12 @@ public class RalphBehavior: MonoBehaviour
 		var identity = (head.transform.parent != null) ? head.transform.parent.rotation : Quaternion.identity;
 		var a = Quaternion.Angle(identity, targetRot);
 
-		//deadband of 60<->90, prevents flickering
-		if(a > 50f) outOfRange = true;
-		else if(a < 35f) outOfRange = false;
-		
-		outOfRange = false;
+		// //deadband of 60<->90, prevents flickering
+		// if(a > 80f) outOfRange = true;
+		// else if(a < 60f) outOfRange = false;
 
+		outOfRange = false;
+		
 		if (!outOfRange)
 		{
 			if(lastRotation == Quaternion.identity) //initialize lastRotation if a perfect identity quaternion
